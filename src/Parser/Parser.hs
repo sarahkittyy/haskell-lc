@@ -107,3 +107,11 @@ nOf n p = do
     if n == 0
         then return []
         else (:) <$> p <*> nOf (n - 1) p
+
+-- | Matches a parser wrapped in parens
+parens :: Parser a -> Parser a
+parens p = do
+    char '('
+    res <- p
+    char ')'
+    return res
