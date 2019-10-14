@@ -115,3 +115,7 @@ parens p = do
     res <- p
     char ')'
     return res
+    
+-- | Matches any amount of whitespace
+spacing :: Parser [Char]
+spacing = many $ char ' '
