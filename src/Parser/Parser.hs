@@ -119,3 +119,7 @@ parens p = do
 -- | Matches any amount of whitespace
 spacing :: Parser [Char]
 spacing = many $ char ' '
+
+-- | Matches zero or one
+maybeParse :: Parser a -> Parser [a]
+maybeParse p = nOf 1 p <|> nOf 0 p 
