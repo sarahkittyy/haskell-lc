@@ -44,7 +44,11 @@ instance Show Expr where
     show (Wrapped expr) = "(" ++ (show expr) ++ ")"
 
 parseExpr :: Parser Expr
-parseExpr = parseApplication <|> parseFunction <|> parseLiteral <|> parseWrapped <|> failure "Invalid LC expression"
+parseExpr = parseApplication <|> 
+            parseFunction <|> 
+            parseLiteral <|> 
+            parseWrapped <|> 
+            failure "Invalid LC expression"
 
 parseWrapped :: Parser Expr
 parseWrapped = Wrapped <$> parens parseExpr
@@ -65,7 +69,5 @@ parseFunction = do
     
 parseApplication :: Parser Expr
 parseApplication = do
-    fn <- parseWrapped <|> parseFunction <|> parseLiteral
-    spacing
-    arg <- parseExpr
-    return $ Application fn arg
+    exprs <- nOf 2 ((parseFunction <|> parseLiteral <|> parseWrapped) <* spacing)
+    return $ Application (exprs !! 0) (exprs !! 1)
