@@ -3,7 +3,7 @@ version:             0.1.0.0
 -- synopsis:
 -- description:
 homepage:            https://github.com/sarahkittyy/lc#readme
-license:             BSD3
+license:             MIT
 license-file:        LICENSE
 author:              Sarah Ohlin
 maintainer:          sarahohlin1@gmail.com
